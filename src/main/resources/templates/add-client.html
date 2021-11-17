@@ -1,0 +1,11 @@
+<form action="#" th:action="@{/clients/create}" th:object="${client}" method="post">
+    <label for="firstName">First Name</label>
+    <input type="text" th:field="*{firstName}" id="firstName" placeholder="firstName">
+    <label for="lastName">Last Name</label>
+    <input type="text" th:field="*{lastName}" id="lastName" placeholder="lastName">
+    <label for="gender">Gender</label>
+    <input type="text" th:field="*{gender}" id="gender" placeholder="gender">
+    <label for="age">Age</label>
+    <input type="text" th:field="*{age}" id="age" placeholder="age">
+    <input type="submit" value="Add Client">   
+</form>

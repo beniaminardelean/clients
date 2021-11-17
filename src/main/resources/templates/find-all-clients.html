@@ -1,0 +1,25 @@
+<div th:switch="${clients}">
+    <h2 th:case="null">No clients yet!</h2>
+        <div th:case="*">
+            <h2>Clients</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="client : ${clients}">
+                    <td th:text="${client.firstName}"></td>
+                    <td th:text="${client.lastName}"></td>
+                    <td th:text="${client.gender}"></td>
+                    <td th:text="${client.age}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>      
+    <p><a href="/clients/add">Add a new client</a></p>
+</div>
