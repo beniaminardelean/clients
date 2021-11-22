@@ -9,6 +9,8 @@
                         <th>Last Name</th>
                         <th>Gender</th>
                         <th>Age</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -17,6 +19,8 @@
                     <td th:text="${client.lastName}"></td>
                     <td th:text="${client.gender}"></td>
                     <td th:text="${client.age}"></td>
+                    <td><a th:href="@{/clients/edit/{id}(id=${client.id})}">Edit</a></td>
+                    <td><a th:href="@{/clients/delete/{id}(id=${client.id})}">Delete</a></td>
                 </tr>
             </tbody>
         </table>

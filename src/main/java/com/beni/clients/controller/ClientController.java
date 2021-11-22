@@ -40,6 +40,29 @@ public class ClientController {
 		return "add-client";
 	}
 
+	@GetMapping(value = "edit/{id}")
+	public String getEditPage(@PathVariable("id") int id, Model model) throws Exception {
+		Optional<Client> clientOpt = clientRepository.findById(id);
+		if (clientOpt.isPresent()) {
+			Client client = clientOpt.get();
+			model.addAttribute("client", client);
+			return "update-client";
+		}
+		throw new Exception("Clientul don`t exists");
+	}
+
+	@PostMapping("/update/{id}")
+	public String updateUser(@PathVariable("id") int id, Client client, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			client.setId(id);
+
+			return "update-client";
+		}
+
+		clientRepository.save(client);
+		return "redirect:/clients";
+	}
+
 	@GetMapping
 	public String showUserList(Model model) {
 		model.addAttribute("clients", clientRepository.findAll());
