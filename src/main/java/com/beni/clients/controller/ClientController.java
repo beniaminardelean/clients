@@ -80,17 +80,15 @@ public class ClientController {
 		throw new Exception("Client must not be null");
 	}
 
-	@DeleteMapping("/delete/{clientId}")
-	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<Void> deleteCourse(@PathVariable int clientId) {
-		Optional<Client> clientOpt = clientRepository.findById(clientId);
-
-		if (clientOpt.isEmpty()) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	@GetMapping("/delete/{id}")
+	public String deleteUser(@PathVariable("id") int id, Model model) {
+		Optional<Client> client = clientRepository.findById(id);
+		if(client.isEmpty()) {
+			throw new IllegalArgumentException("invalid client id");
 		}
-
-		clientRepository.deleteById(clientId);
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		clientRepository.delete(client.get());
+		return "redirect:/";
 
 	}
+
 }
