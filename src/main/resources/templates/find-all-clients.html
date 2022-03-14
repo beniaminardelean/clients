@@ -11,6 +11,7 @@
                         <th>Age</th>
                         <th>Edit</th>
                         <th>Delete</th>
+                        <th>View client cars</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,6 +22,7 @@
                     <td th:text="${client.age}"></td>
                     <td><a th:href="@{/clients/edit/{id}(id=${client.id})}">Edit</a></td>
                     <td><a th:href="@{/clients/delete/{id}(id=${client.id})}">Delete</a></td>
+                    <td><a th:href="@{/cars/{id}(id=${client.id})}">View client cars</a></td>
                 </tr>
             </tbody>
         </table>

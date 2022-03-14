@@ -32,7 +32,7 @@ public class ClientController {
 		if (clientOpt.isPresent()) {
 			return clientOpt.get();
 		}
-		throw new Exception("Clientul don`t exists");
+		throw new Exception("Client don`t exists");
 	}
 
 	@GetMapping(value = "/add")
@@ -48,11 +48,11 @@ public class ClientController {
 			model.addAttribute("client", client);
 			return "update-client";
 		}
-		throw new Exception("Clientul don`t exists");
+		throw new Exception("Client don`t exists");
 	}
 
 	@PostMapping("/update/{id}")
-	public String updateUser(@PathVariable("id") int id, Client client, BindingResult result, Model model) {
+	public String updateClient(@PathVariable("id") int id, Client client, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			client.setId(id);
 
@@ -64,7 +64,7 @@ public class ClientController {
 	}
 
 	@GetMapping
-	public String showUserList(Model model) {
+	public String showClientsList(Model model) {
 		model.addAttribute("clients", clientRepository.findAll());
 		model.getAttribute("clients");
 		return "find-all-clients";
@@ -75,13 +75,13 @@ public class ClientController {
 	public String create(Client client, BindingResult result, Model model) throws Exception {
 		if (client != null) {
 			clientRepository.save(client);
-			return "redirect:/";
+			return "redirect:/clients";
 		}
 		throw new Exception("Client must not be null");
 	}
 
 	@GetMapping("/delete/{id}")
-	public String deleteUser(@PathVariable("id") int id, Model model) {
+	public String deleteClient(@PathVariable("id") int id, Model model) {
 		Optional<Client> client = clientRepository.findById(id);
 		if(client.isEmpty()) {
 			throw new IllegalArgumentException("invalid client id");

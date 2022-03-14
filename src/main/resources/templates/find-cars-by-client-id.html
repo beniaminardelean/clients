@@ -1,0 +1,31 @@
+<div th:switch="${cars}">
+	<h2 th:case="null">No cars yet!</h2>
+	<div th:case="*">
+		<h2>Cars</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Registration number</th>
+					<th>Color</th>
+					<th>Number of seats</th>
+					<th>Hp</th>
+					<th>Weight</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="car : ${cars}">
+					<td th:text="${car.registrationNumber}"></td>
+					<td th:text="${car.color}"></td>
+					<td th:text="${car.numberOfSeats}"></td>
+					<td th:text="${car.hp}"></td>
+					<td th:text="${car.weight}"></td>
+					<td><a th:href="@{/cars/edit/{id}(id=${car.id})}">Edit</a></td>
+					<td><a th:href="@{/cars/delete/{id}(id=${car.id})}">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>	
+	</div>
+</div>
+<div><a th:href="@{/cars/add/{clientId}(clientId=${clientId})}">Add a new car</a></div>
