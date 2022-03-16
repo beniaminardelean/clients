@@ -1,6 +1,6 @@
-<div th:switch="${cars}">
-	<h2 th:case="null">No cars yet!</h2>
-	<div th:case="*">
+<div>
+<h2 th:if="${cars.empty}">No cars yet!</h2>
+	<div th:if="${!cars.empty}">
 		<h2>Cars</h2>
 		<table>
 			<thead>

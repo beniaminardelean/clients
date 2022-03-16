@@ -1,7 +1,7 @@
-<div th:switch="${clients}">
-    <h2 th:case="null">No clients yet!</h2>
-        <div th:case="*">
-            <h2>Clients</h2>
+<div>
+<h2 th:if="${clients.empty}">No clients yet!</h2>
+	<div th:if="${!clients.empty}">
+		<h2>Clients</h2>
             <table>
                 <thead>
                     <tr>

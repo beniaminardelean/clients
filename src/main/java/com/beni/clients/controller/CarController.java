@@ -1,11 +1,9 @@
 package com.beni.clients.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.beni.clients.model.Car;
 import com.beni.clients.model.Client;
@@ -53,7 +50,6 @@ public class CarController {
 	}
 	
 	@PostMapping("/create/{clientId}")
-	@ResponseStatus(HttpStatus.CREATED)
 	public String create(Car car, BindingResult result, Model model, @PathVariable("clientId") int clientId) throws Exception {
 		
 		Optional<Client> clientOpt = clientRepository.findById(clientId);
