@@ -77,7 +77,7 @@ public class ClientController {
 	@GetMapping("/delete/{id}")
 	public String deleteClient(@PathVariable("id") int id, Model model) {
 		Optional<Client> client = clientRepository.findById(id);
-		if(client.isEmpty()) {
+		if (client.isEmpty()) {
 			throw new IllegalArgumentException("invalid client id");
 		}
 		clientRepository.delete(client.get());

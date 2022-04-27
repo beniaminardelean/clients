@@ -32,7 +32,7 @@ public class CarController {
 		Optional<Client> clientOpt = clientRepository.findById(id);
 		if (clientOpt.isPresent()) {
 			Client client = clientOpt.get();
-			List<Car> cars = client.getCars(); 
+			List<Car> cars = client.getCars();
 			model.addAttribute("cars", cars);
 			model.getAttribute("cars");
 			model.addAttribute("clientId", id);
@@ -43,15 +43,16 @@ public class CarController {
 	}
 
 	@GetMapping(value = "/add/{id}")
-	public String getCarPage(@PathVariable("id") int id, Car car,Model model) {
+	public String getCarPage(@PathVariable("id") int id, Car car, Model model) {
 		model.addAttribute("clientId", id);
 		model.getAttribute("clientId");
 		return "add-car";
 	}
-	
+
 	@PostMapping("/create/{clientId}")
-	public String create(Car car, BindingResult result, Model model, @PathVariable("clientId") int clientId) throws Exception {
-		
+	public String create(Car car, BindingResult result, Model model, @PathVariable("clientId") int clientId)
+			throws Exception {
+
 		Optional<Client> clientOpt = clientRepository.findById(clientId);
 		if (clientOpt.isPresent()) {
 			Client client = clientOpt.get();
@@ -64,14 +65,45 @@ public class CarController {
 		}
 		throw new Exception("Car must not be null");
 	}
-	
+
 	@GetMapping("/delete/{id}")
 	public String deleteClient(@PathVariable("id") int id, Model model) {
 		Optional<Car> car = carRepository.findById(id);
-		if(car.isEmpty()) {
+		if (car.isEmpty()) {
 			throw new IllegalArgumentException("invalid car id");
 		}
 		carRepository.delete(car.get());
 		return "redirect:/";
 	}
+
+	@GetMapping(value = "edit/{id}")
+	public String getEditPage(@PathVariable("id") int id, Model model) throws Exception {
+		Optional<Car> carOpt = carRepository.findById(id);
+		if (carOpt.isPresent()) {
+			Car car = carOpt.get();
+			model.addAttribute("car", car);
+			return "update-car";
+		}
+		throw new Exception("Car don`t exists");
+	}
+
+	@PostMapping("/update/{id}")
+	public String updateCar(@PathVariable("id") int id, Car car, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			car.setId(id);
+
+			return "update-car";
+		}
+
+		Optional<Car> carOpt = carRepository.findById(id);
+		if (carOpt.isPresent()) {
+			Car oldCar = carOpt.get();
+			car.setClient(oldCar.getClient());
+			carRepository.save(car);
+			return "redirect:/cars/" + oldCar.getClient().getId();
+		}
+		carRepository.save(car);
+		return "redirect:/clients";
+	}
+
 }

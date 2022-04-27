@@ -1,0 +1,16 @@
+<form action="#" 
+  th:action="@{/cars/update/{id}(id=${car.id})}" 
+  th:object="${car}" 
+  method="post"> 
+    <label for="registrationNumber">Registration Number</label>
+    <input type="text" th:field="*{registrationNumber}" id="registrationNumber" placeholder="registrationNumber">
+    <label for="color">Color</label>
+    <input type="text" th:field="*{color}" id="color" placeholder="color">
+    <label for="numberOfSeats">Number Of Seats</label>
+    <input type="text" th:field="*{numberOfSeats}" id="numberOfSeats" placeholder="numberOfSeats">
+    <label for="hp">Hp</label>
+    <input type="text" th:field="*{hp}" id="hp" placeholder="hp">
+    <label for="weight">Weight</label>
+    <input type="text" th:field="*{weight}" id="weight" placeholder="weight">
+    <input type="submit" value="Edit Car">  
+</form>
